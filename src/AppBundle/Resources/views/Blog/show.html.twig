@@ -10,7 +10,7 @@
 		{% if post.imagePath %}
 			<img src="{{ asset(post.imagePath) }}" width="100%" height="auto" style="margin-bottom: 25px;">
 		{% endif %}
-		{{ post.content }}
+		<p>{{ post.content }}</p>
 		<div>
 			<h3 style="text-transform: uppercase" >Tags of post</h3>
 			{{ post.tags }}

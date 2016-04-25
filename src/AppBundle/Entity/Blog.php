@@ -59,7 +59,6 @@ class Blog
     /**
     * @ORM\Column
     */
-
     private $imagePath;
 
     /**

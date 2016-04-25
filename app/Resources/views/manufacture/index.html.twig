@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Manufacture list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for manufacture in manufactures %}
+            <tr>
+                <td><a href="{{ path('manufacture_show', { 'id': manufacture.id }) }}">{{ manufacture.id }}</a></td>
+                <td>{{ manufacture.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('manufacture_show', { 'id': manufacture.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('manufacture_edit', { 'id': manufacture.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('manufacture_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

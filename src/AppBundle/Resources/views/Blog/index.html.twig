@@ -15,7 +15,7 @@
 		{% if post.imagePath %}
 			<img src="{{ asset(post.imagePath) }}" width="300px" height="auto" style="display: block; margin-bottom: 25px;">
 		{% endif %}
-		{{ post.content }}
+		<p>{{ post.content }}</p>
 		<div class="pull-right">
 			{{ post.createdAt|date('jS F, Y') }}
 		</div>

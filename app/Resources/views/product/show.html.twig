@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-6">
+       {% if product.imagePath %}
+            <img src="{{ asset(product.imagePath) }}" width="100%" height="auto" style="margin-bottom: 25px;">
+        {% endif %}
+    </div>
+    <div class="col-lg-6">
+    <h1 style="text-transform: uppercase;">{{ product.name }}</h1>
+        <ul>
+            <li style="list-style-type:none;"><span style="color: green; font-size:16px; margin-right:5px;">Price:</span><strong style="font-weight:bold; font-size: 18px;">{{ product.price }} $</strong></li>
+            <li style="list-style-type:none;"><span style="color: green; font-size:16px; margin-right:5px;">Manufacture:</span><strong style="font-weight:bold; font-size: 18px;">{{ product.manufacture }}</strong></li>
+            <li style="list-style-type:none;"><span style="color: green; font-size:16px; margin-right:5px;">Category:</span><strong style="font-weight:bold; font-size: 18px;">{{ product.category }}</strong></li>
+        </ul>
+      <h2 style="text-transform: uppercase;">Product description</h2>
+        {{ product.description }}    
+    </div>
+</div>
+    <div class="row">
+    <ul style="padding: 0">
+        <li style="list-style-type:none;">
+            <a style="margin-bottom: 15px;" class="btn btn-info" href="{{ path('product_index') }}">Back to the list</a>
+        </li>
+        <li style="list-style-type:none;">
+            <a style="margin-bottom: 15px;" class="btn btn-warning" href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>
+        </li>
+        <li style="list-style-type:none;">
+            {{ form_start(delete_form) }}
+                <input style="margin-bottom: 15px;" class="btn btn-danger" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    </div>
+{% endblock %}

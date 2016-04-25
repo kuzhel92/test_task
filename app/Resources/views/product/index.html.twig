@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product list</h1>
+
+    <table style="width:100%; text-align:center; border:1px solid #000; margin-bottom: 20px; ">
+        <thead style="width:100%; text-align:center;">
+            <tr style="width:100%; text-align:center !important; border:1px solid #000;">
+                <th style="text-align:center !important; text-transform: uppercase; padding:20px 0;">Name</th>
+                <th style="text-align:center !important; text-transform: uppercase; padding:20px 0;">Manufacture</th>
+                <th style="text-align:center !important; text-transform: uppercase; padding:20px 0;">Category</th>
+                <th style="text-align:center !important; text-transform: uppercase; padding:20px 0;">Image</th>
+                <th style="text-align:center !important; text-transform: uppercase; padding:20px 0;">Price</th>
+                <th style="text-align:center !important; text-transform: uppercase; padding:20px 0;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr style="border:1px solid #000;">
+                <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.name }}</a></td>
+                <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.manufacture }}</a></td>
+                <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.category }}</a></td>
+                <td><img src="{{ asset(product.imagePath) }}" width="100%" height="auto" style="max-width: 250px; margin-bottom: 0px;"></td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <ul style="padding:0;">
+                        <li style="list-style-type:none;">
+                            <a style="width:100%; display:block !important; margin-bottom: 5px;" class="btn btn-success" href="{{ path('product_show', { 'id': product.id }) }}">show</a>
+                        </li>
+                        <li style="list-style-type:none; width:100%; display:block !important;">
+                            <a style="width:100%; display:block !important;" class="btn btn-warning" href="{{ path('product_edit', { 'id': product.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li style="list-style-type:none;">
+            <a class="btn btn-info" href="{{ path('product_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

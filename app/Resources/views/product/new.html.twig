@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input class="btn btn-info" style="margin-bottom:15px;" type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul style="padding:0;">
+        <li style="list-style-type:none;">
+            <a class="btn btn-success" href="{{ path('product_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -52,7 +52,15 @@
                                     <li><a href="{{ path('create_post' )}}">Create post</a></li>
                                      <li><a href="{{ path('tags_index' )}}">All tags for posts</a></li>
                                     <li><a href="{{ path('tags_new' )}}">Create tags for posts</a></li>
-                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalog details <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('product_new' )}}">Create product</a></li>
+                                    <li><a href="{{ path('product_index' )}}">All products</a></li>
+                                    <li><a href="{{ path('category_new' )}}">Create category</a></li>
+                                    <li><a href="{{ path('manufacture_new' )}}">Create manufacture</a></li>
                                 </ul>
                             </li>
                         </ul>

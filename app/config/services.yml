@@ -23,3 +23,27 @@ services:
             - ~
             - AppBundle\Entity\Tags
             - 'AppBundle:TagsAdmin'
+    appbundle.admin.categories:
+        class: AppBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Category for products, label: "Category name" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Category
+            - 'AppBundle:CategoryAdmin'
+    appbundle.admin.manufactures:
+        class: AppBundle\Admin\ManufactureAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Manufacture for products, label: "Manufacture name" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Manufacture
+            - 'AppBundle:ManufactureAdmin'
+    appbundle.admin.product:
+        class: AppBundle\Admin\ProductAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Products, label: "Products" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Product
+            - 'AppBundle:ProductAdmin'
