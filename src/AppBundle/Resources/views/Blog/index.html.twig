@@ -3,5 +3,29 @@
 {% block title %}AppBundle:Blog:index{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Blog:index page</h1>
+<h1>Blog</h1>
+
+{% for post in posts %}
+{#% if post.is_published == 0 %#}
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h3 class="panel-title">{{ post.title }}</h3>
+	</div>
+	<div class="panel-body">
+		<p>{{ post.content }}</p>
+		<div class="pull-right">
+			{{ post.createdAt|date('jS F, Y') }}
+		</div>
+		<div class="btns">
+			<a class="btn btn-danger" href="{{ path('remove_post', {'post': post.id}) }}">Remove post</a>
+			<a class="btn btn-warning" href="{{ path('update_post', {'post': post.id}) }}">Update post</a>
+			<a class="btn btn-success" href="{{ path('show_post', {'post': post.id}) }}">Show post</a>
+		</div>
+	</div>
+</div>
+{#% endif %#}
+{% else %}
+	<h2>Not post in our blog</h2>
+{% endfor %}
+
 {% endblock %}

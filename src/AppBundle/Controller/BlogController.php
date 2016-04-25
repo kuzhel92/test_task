@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Blog;
+use AppBundle\Form\Type\PostType;
 
 class BlogController extends Controller
 {
@@ -13,44 +16,78 @@ class BlogController extends Controller
      * @Route("/create", name="create_post")
      * @Template 
      */
-    public function createAction()
+    public function createAction(Request $r)
     {
-        $form = $this->createFormBuilder(['title'=>null, 'content'=>null])
-                   ->add('title', Type\TextType::class)
-                   ->add('content', Type\TextareaType::class)
-                   ->add('save', Type\SubmitType::class)
-                   ->getForm();
+        $post = new Blog;
+        $form = $this->createForm(PostType::class, $post);
+
+        $form->handleRequest($r);
+         $img_file = $post->getImageFile();
+            if ($img_file) {
+                $original_name = $img_file->getClientOriginalName();
+                $img_file->move('public/images', $original_name);
+                $path = 'public/images/' . $original_name;
+                $post->setImagePath($path);
+            }
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('homepage');
+
+
+
+        }
+
         return [
             'form' => $form->createView()
         ];
     }
 
     /**
-     * @Route("/show")
+     * @Route("/show/{post}", name="show_post")
      * @Template 
      */
-    public function showAction()
+    public function showAction(Blog $post)
     {
-        return [];
+        return ['post' => $post];
     }
 
     /**
-     * @Route("/update")
+     * @Route("/update/{post}", name="update_post")
      * @Template 
      */
-    public function updateAction()
+    public function updateAction(Blog $post, Request $r)
     {
-        return [];
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($r);
+        $img_file = $post->getImageFile();
+            if ($img_file) {
+                $original_name = $img_file->getClientOriginalName();
+                $img_file->move('../web/public/images', $original_name);
+                $path = '../web/public/images/' . $original_name;
+                $post->setImagePath($path);
+            }
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('blog');
+        }
+        return ['form' => $form->createView()];
     
     }
 
     /**
-     * @Route("/remove")
+     * @Route("/remove/{post}", name="remove_post")
      * @Template 
      */
-    public function removeAction()
+    public function removeAction(Blog $post)
     {
-        return [];
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($post);
+        $em->flush();
+        return $this->redirectToRoute('blog');
         
     }
 
@@ -60,7 +97,9 @@ class BlogController extends Controller
      */
     public function indexAction()
     {
-        return [];
+        $em = $this->getDoctrine()->getManager()->getRepository('AppBundle:Blog');
+        $posts = $em->findAll();
+        return ['posts' => $posts];
     }
 
 }

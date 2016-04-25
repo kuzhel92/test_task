@@ -3,5 +3,20 @@
 {% block title %}AppBundle:Blog:show{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Blog:show page</h1>
+	<div class="panel-heading panel-success">
+		<h1 class="panel-title">{{ post.title }}</h1>
+	</div>
+	<div class="panel-body">
+		{% if post.imagePath %}
+			<img src="{{ asset(post.imagePath) }}" width="100%" height="auto" style="margin-bottom: 25px;">
+		{{ post.content }}
+		{% endif %}
+		<div class="pull-right">
+			{{ post.createdAt|date('jS F, Y') }}
+		</div>
+		<div class="btns">
+			<a class="btn btn-danger" href="{{ path('remove_post', {'post': post.id}) }}">Remove post</a>
+			<a class="btn btn-warning" href="{{ path('update_post', {'post': post.id}) }}">Update post</a>
+		</div>
+	</div>
 {% endblock %}
