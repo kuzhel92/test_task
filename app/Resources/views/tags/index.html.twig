@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tags list</h1>
+
+        {% for tag in tags %}
+                <div class="row" style="margin-bottom: 15px;">
+                    <!--<a href="{{ path('tags_show', { 'id': tag.id }) }}">{{ tag.id }}</a>-->
+                    <div class="col-lg-4">
+                        {{ tag.name }}
+                    </div>
+                    <div class="col-lg-8">
+                        <a class="btn btn-info" href="{{ path('tags_show', { 'id': tag.id }) }}">show</a>
+                        <a class="btn btn-warning" href="{{ path('tags_edit', { 'id': tag.id }) }}">edit</a>
+                    </div>
+
+                </div>     
+        {% endfor %}
+        
+            <a class="btn btn-success" href="{{ path('tags_new') }}">Create a new entry</a>
+     
+{% endblock %}

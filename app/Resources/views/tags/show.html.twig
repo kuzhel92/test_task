@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tags</h1>
+        <h2>{{ tag.name }}</h2>
+   <ul style="padding: 0;">
+        <li style="list-style-type: none; margin-bottom: 10px;" ><a class="btn btn-warning" href="{{ path('tags_edit', { 'id': tag.id }) }}">edit</a></li>
+        <li style="list-style-type: none;">
+            {{ form_start(delete_form) }}
+                <input class="btn btn-danger" type="submit" value="Delete" style="margin-bottom: 10px;">
+            {{ form_end(delete_form) }}
+            <a class="btn btn-info" style="margin-bottom: 10px;" href="{{ path('tags_index') }}">Back to the list</a>
+        </li>
+
+    </ul>
+{% endblock %}

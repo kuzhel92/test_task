@@ -4,13 +4,17 @@
 
 {% block body %}
 	<div class="panel-heading panel-success">
-		<h1 class="panel-title">{{ post.title }}</h1>
+		<h1 class="panel-title" style="text-transform: uppercase; font-size:20px;">{{ post.title }}</h1>
 	</div>
 	<div class="panel-body">
 		{% if post.imagePath %}
 			<img src="{{ asset(post.imagePath) }}" width="100%" height="auto" style="margin-bottom: 25px;">
-		{{ post.content }}
 		{% endif %}
+		{{ post.content }}
+		<div>
+			<h3 style="text-transform: uppercase" >Tags of post</h3>
+			{{ post.tags }}
+		</div>
 		<div class="pull-right">
 			{{ post.createdAt|date('jS F, Y') }}
 		</div>

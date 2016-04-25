@@ -77,9 +77,10 @@ class Blog
     /**
      * @var int
      *
-     * @ORM\Column(name="tags_id", type="integer", nullable=true)
+     * @ORM\Column(name="tags", type="integer", nullable=true)
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="tags")
      */
-    private $tagsId;
+    private $tags;
 
 
     /**
@@ -164,16 +165,6 @@ class Blog
         return $this->createdAt;
     }
 
-    /**
-     * Get isPublished
-     *
-     * @return bool
-     */
-    public function getIsPublished()
-    {
-        return $this->isPublished;
-    }
-
      /**
      * Set isPublished
      *
@@ -185,6 +176,18 @@ class Blog
 
         return $this;
     }
+
+    /**
+     * Get isPublished
+     *
+     * @return bool
+     */
+    public function getIsPublished()
+    {
+        return $this->isPublished;
+    }
+
+    
 
     /**
      * Set tagsId
@@ -252,5 +255,29 @@ public function setInitialCreatedAt()
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param integer $tags
+     *
+     * @return Blog
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return integer
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tags creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input class="btn btn-success" type="submit" value="Create" style="margin-bottom: 25px;" />
+    {{ form_end(form) }}
+
+    <ul style="padding: 0;">
+        <li style="list-style-type: none;">
+            <a class="btn btn-info" href="{{ path('tags_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
